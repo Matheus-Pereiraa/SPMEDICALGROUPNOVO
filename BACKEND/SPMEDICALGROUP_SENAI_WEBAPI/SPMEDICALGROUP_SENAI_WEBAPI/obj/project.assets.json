@@ -5703,19 +5703,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LUCIANE PC\\.nuget\\packages\\": {}
+    "C:\\Users\\50374464812\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LUCIANE PC\\Desktop\\area de trabalho\\Senai 2 semestre\\SPMEDICALGROUP\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI.csproj",
+      "projectUniqueName": "C:\\Users\\50374464812\\Desktop\\Nova pasta\\SPMEDICALGROUPNOVO\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI.csproj",
       "projectName": "SPMEDICALGROUP_SENAI_WEBAPI",
-      "projectPath": "C:\\Users\\LUCIANE PC\\Desktop\\area de trabalho\\Senai 2 semestre\\SPMEDICALGROUP\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI.csproj",
-      "packagesPath": "C:\\Users\\LUCIANE PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LUCIANE PC\\Desktop\\area de trabalho\\Senai 2 semestre\\SPMEDICALGROUP\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\obj\\",
+      "projectPath": "C:\\Users\\50374464812\\Desktop\\Nova pasta\\SPMEDICALGROUPNOVO\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI.csproj",
+      "packagesPath": "C:\\Users\\50374464812\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\50374464812\\Desktop\\Nova pasta\\SPMEDICALGROUPNOVO\\BACKEND\\SPMEDICALGROUP_SENAI_WEBAPI\\SPMEDICALGROUP_SENAI_WEBAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\LUCIANE PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\50374464812\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5792,7 +5792,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

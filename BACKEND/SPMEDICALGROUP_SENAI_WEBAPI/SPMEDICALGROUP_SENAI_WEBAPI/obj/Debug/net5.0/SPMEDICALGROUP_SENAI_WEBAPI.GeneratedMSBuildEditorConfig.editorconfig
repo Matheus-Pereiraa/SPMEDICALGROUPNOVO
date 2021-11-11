@@ -6,3 +6,5 @@ build_property.ProjectTypeGuids =
 build_property.PublishSingleFile = 
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
+build_property.RootNamespace = SPMEDICALGROUP_SENAI_WEBAPI
+build_property.ProjectDir = C:\Users\50374464812\Desktop\Nova pasta\SPMEDICALGROUPNOVO\BACKEND\SPMEDICALGROUP_SENAI_WEBAPI\SPMEDICALGROUP_SENAI_WEBAPI\

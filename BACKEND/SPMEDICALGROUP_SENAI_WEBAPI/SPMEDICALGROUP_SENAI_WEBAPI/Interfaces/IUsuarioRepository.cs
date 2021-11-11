@@ -1,4 +1,5 @@
-﻿using SPMEDICALGROUP_SENAI_WEBAPI.Domains;
+﻿using Microsoft.AspNetCore.Http;
+using SPMEDICALGROUP_SENAI_WEBAPI.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,5 +47,25 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Interfaces
         /// </summary>
         /// <param name="idUsuario"> ID do usuário deletado</param>
         void Deletar(int idUsuario);
+
+
+        /// <summary>
+        /// Salva a foto de um usuário
+        /// </summary>
+        /// <param name="foto">foto salva</param>
+        /// <param name="id_usuario">id do usuário a qual a foto é</param>
+        void SalvarPerfilDir(IFormFile foto, int id_usuario);
+
+        /// <summary>
+        /// Consulta a foto do usuário
+        /// </summary>
+        /// <param name="id_usuario">id do usuario vai ter a foto dele buscada</param>
+        /// <returns>A foto em base64</returns>
+        string ConsultarPerfilDir(int id_usuario);
+
+        /// <summary>
+        /// Cria pasta se não existir
+        /// </summary>
+        void CriarPasta();
     }
 }

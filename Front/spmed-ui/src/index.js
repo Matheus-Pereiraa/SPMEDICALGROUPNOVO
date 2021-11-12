@@ -1,23 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+
 import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Login from './Pages/Login/Login';
-import {Router, BrowseRouter as Router, Switch} from 'react-router-dom';
+
+
+
+import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
 
 
 
 
+import Login from './Pages/Login/Login.js';
 import Home from './Pages/Home/App';
+import NotFound from './Pages/NotFound/NotFound';
 
 
+
+
+
+import reportWebVitals from './reportWebVitals';
 
 const routing = (
   <Router>
     <div>
       <Switch>
           <Route exact path="/" component={Home} />{/* Home */}
-          <Route path="/Login" Component={Login} />{/* Login */}
+          <Route path="/login" component={Login} />{/* Login */}
+          <Route path="/notfound" component={NotFound} />{/* NotFound */}
+          <Redirect to='/notfound' /> {/* NotFound */}
       </Switch>
     </div>
   </Router>
@@ -29,7 +40,7 @@ const routing = (
 
 
 ReactDOM.render(
-  routing, 
+  routing,
   document.getElementById('root')
 );
 

@@ -8,12 +8,16 @@ import axios from "axios";
         super(props);
         this.state = {
             Email : '',
-            Senha : ''
+            Senha : '',
+            erroMensagem : '',
+            isLoading : false
         };
     };
 
     efetualogin = (event) => {
         event.preventDefault()
+
+        this.state({erroMensagem : '', isLoading : true })
         
         axios.post('htttp://localhost:5000/api/Login', {
             Email : this.state.Email, 
@@ -22,10 +26,16 @@ import axios from "axios";
 
         .then(resposta => {
             if (resposta.status === 200){
-                console.log('login realizado com sucesso')
+                console.log('Meu Token é' + resposta.data.token);
+                localStorage.setItem('usuario-token', resposta.data.token)
+                this.setState({isLoading : false})
             }
+            
 
             
+        })
+        .catch(() => {
+            this.setState({ erroMensagem : 'E-mail e/ou senha inválidos' })
         })
     }
 
@@ -59,6 +69,8 @@ import axios from "axios";
                             placeholder="Escreva sua senha"
                             />
                            
+                            <p style={{color : 'red'}}>{this.state.erroMensagem}</p>
+
                            <button type="submit">
                                Login
                            </button>

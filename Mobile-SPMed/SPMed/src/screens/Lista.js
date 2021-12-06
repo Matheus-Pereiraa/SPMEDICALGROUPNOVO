@@ -83,7 +83,7 @@ class Main extends Component {
 
         {/* HEADER */}
         <View style={styles.mainHeader}>
-          <Text style={styles.mainHeaderText}>{"Consultas".toUpperCase()}</Text>
+          <Text style={styles.mainHeaderText}>{"".toUpperCase()}</Text>
           <View style={styles.mainHeaderLine} />
         </View>
 

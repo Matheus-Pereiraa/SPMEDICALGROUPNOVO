@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler';
+
 import React, { Component } from 'react';
 import {
   FlatList,
@@ -8,6 +10,7 @@ import {
   Text,
   useColorScheme,
   View,
+  TouchableOpacity,
   Image,
 } from 'react-native';
 
@@ -27,122 +30,37 @@ import Lista from './src/screens/Lista';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const bottomTab = createBottomTabNavigator();
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 import api from './src/services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Login from './src/screens/Login';
+import Main from './src/screens/main';
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ListaConsulta: []
-    };
-  };
-
-  inscrever = async idConsulta => {
-    try {
-      const token = await AsyncStorage.getItem('userToken');
-
-      console.warn(idConsulta);
-
-      await api.post(
-        '/presenca/Consultas' + idconsulta,
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        },
-      );
-    } catch (error) {
-      console.warn(error);
-    }
-  };
+const AuthStack = createStackNavigator();
 
 
-
-  BuscarConsulta = async () => {
-    const resposta = await api.get('/Consultas');
-    const dadoDaApi = resposta.data;
-    this.setState({ ListaConsulta: dadoDaApi })
-  }
+class App extends Component {
 
 
   render() {
     return (
       <View style={styles.main}>
-        <StatusBar 
+        <StatusBar
           hidden={true}
         />
 
 
-      <NavigationContainer>
-        {/* HEADER */}
-        <View style={styles.mainHeader}>
-          <Text style={styles.mainHeaderText}>{"Consultas".toUpperCase()}</Text>
-          <View style={styles.mainHeaderLine} />
-        </View>
-        
-        <View style={styles.mainBody}>
-          <FlatList
-            contentContainerStyle={styles.mainBodyContent}
-            data={this.state.ListaConsulta}
-            keyExtractor={item => item.idConsulta}
-            renderItem={this.renderItem}
-          />
-        </View>
+        <NavigationContainer>
 
-        <bottomTab.Navigator
-        initialRouteName='Lista'
+          <AuthStack.Navigator>
+            <AuthStack.Screen name='Login' component={Login}/>
+            <AuthStack.Screen name='Main' component={Main}/>
 
-        // versão 5.x do React Navigation
-        // tabBarOptions={{
-          //   showLabel: false,
-        //   showIcon: true,
-        //   activeBackgroundColor: '#B727FF',
-        //   inactiveBackgroundColor: '#DD99FF',
-        //   activeTintColor: 'red',
-        //   inactiveTintColor: 'blue',
-        //   style: { height: 50 }
-        // }}
-        
-        screenOptions={ ({ route }) => ({
-          tabBarIcon: () => {
-            
-            if (route.name === 'Lista') {
-              return(
-                <Image
-                  source={require('./assets/img/listados.png')}
-                  style={styles.tabBarIcon}
-                />
-              )
-            }
-            if (route.name === 'Perfil') {
-              return(
-                <Image
-                  source={require('./assets/img/logo-login.png')}
-                  style={styles.tabBarIcon}
-                />
-              )
-            }
-          },
+          </AuthStack.Navigator>
 
-           // React Navigation 6.x
-           headerShown: false,
-           tabBarShowLabel: false,
-           tabBarActiveBackgroundColor: '#C3EBFA',
-           tabBarInactiveBackgroundColor: '#E0F5FD',
-           // tabBarActiveTintColor: 'blue',
-           // tabBarInactiveTintColor: 'red',
-           tabBarStyle: { height: 80 }              
-         }) }
-       >
-         <bottomTab.Screen name="Lista" component={Lista} />
-         <bottomTab.Screen name="Perfil" component={Perfil} />
-       </bottomTab.Navigator>  
-       
         </NavigationContainer>
 
 
@@ -224,4 +142,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Main;
+export default App;

@@ -59,8 +59,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// Lista todas as Consultas existentes
         /// </summary>
         /// <returns>Uma lista de consultas com o status code 200 - Ok</returns>
-        ///  [Authorize(Roles = "2,3")]
-        [HttpGet("minhas")]
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Listar()
         {

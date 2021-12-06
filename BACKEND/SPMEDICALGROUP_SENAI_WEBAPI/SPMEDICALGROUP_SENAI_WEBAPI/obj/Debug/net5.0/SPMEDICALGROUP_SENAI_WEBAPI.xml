@@ -64,7 +64,6 @@
             Lista todas as Consultas existentes
             </summary>
             <returns>Uma lista de consultas com o status code 200 - Ok</returns>
-             [Authorize(Roles = "2,3")]
         </member>
         <member name="M:SPMEDICALGROUP_SENAI_WEBAPI.Controller.ConsultaController.BuscarPorId(System.Int32)">
             <summary>
@@ -170,7 +169,13 @@
             </summary>
             <returns>Uma lista de usuários com o status code 200 - fé</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:SPMEDICALGROUP_SENAI_WEBAPI.Controller.UsuarioController.BuscarPorId(System.Int32)" -->
+        <member name="M:SPMEDICALGROUP_SENAI_WEBAPI.Controller.UsuarioController.BuscarPorId(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="idUsuario">id do usuário a ser buscado</param>
+            <returns>Um usuário encontrado com o status code 200 - Ok</returns>
+        </member>
         <member name="M:SPMEDICALGROUP_SENAI_WEBAPI.Controller.UsuarioController.getDIR">
             <summary>
             Consulta a foto de perfil de um usuário

@@ -8,6 +8,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Image,
 } from 'react-native';
 
 import {
@@ -40,8 +41,30 @@ class Main extends Component {
     };
   };
 
+  inscrever = async idConsulta => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+
+      console.warn(idConsulta);
+
+      await api.post(
+        '/presenca/Consultas' + idconsulta,
+        {},
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        },
+      );
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
+
+
   BuscarConsulta = async () => {
-    const resposta = await api.get('/consultas');
+    const resposta = await api.get('/Consultas');
     const dadoDaApi = resposta.data;
     this.setState({ ListaConsulta: dadoDaApi })
   }
@@ -50,71 +73,18 @@ class Main extends Component {
   render() {
     return (
       <View style={styles.main}>
-
-        <NavigationContainer>
-        <bottomTab.Navigator
-            initialRouteName='Lista'
-
-            // versão 5.x do React Navigation
-            // tabBarOptions={{
-            //   showLabel: false,
-            //   showIcon: true,
-            //   activeBackgroundColor: '#B727FF',
-            //   inactiveBackgroundColor: '#DD99FF',
-            //   activeTintColor: 'red',
-            //   inactiveTintColor: 'blue',
-            //   style: { height: 50 }
-            // }}
-            
-            screenOptions={ ({ route }) => ({
-              tabBarIcon: () => {
-                if (route.name === 'Consultas') {
-                  return(
-                    <Image
-                      source={require('../SPMed/assets/img/listados.png')}
-                      style={styles.tabBarIcon}
-                    />
-                  )
-                }
-                
-                if (route.name === 'Perfil') {
-                  return(
-                    <Image
-                      source={require('../SPMed/assets/img/logo-login.png')}
-                      style={styles.tabBarIcon}
-                    />
-                  )
-                }
-              },
-
-              // React Navigation 6.x
-              headerShown: false,
-              tabBarShowLabel: false,
-              tabBarActiveBackgroundColor: '#B727FF',
-              tabBarInactiveBackgroundColor: '#DD99FF',
-              // tabBarActiveTintColor: 'blue',
-              // tabBarInactiveTintColor: 'red',
-              tabBarStyle: { height: 50 }              
-            }) }
-          >
-            <bottomTab.Screen name="Consultas" component={Lista} />
-            <bottomTab.Screen name="Perfil" component={Perfil} />
-          </bottomTab.Navigator> 
-        </NavigationContainer>
+        <StatusBar 
+          hidden={true}
+        />
 
 
-
-
-
-
-
-
+      <NavigationContainer>
         {/* HEADER */}
         <View style={styles.mainHeader}>
           <Text style={styles.mainHeaderText}>{"Consultas".toUpperCase()}</Text>
           <View style={styles.mainHeaderLine} />
         </View>
-
+        
         <View style={styles.mainBody}>
           <FlatList
             contentContainerStyle={styles.mainBodyContent}
@@ -122,8 +92,60 @@ class Main extends Component {
             keyExtractor={item => item.idConsulta}
             renderItem={this.renderItem}
           />
-
         </View>
+
+        <bottomTab.Navigator
+        initialRouteName='Lista'
+
+        // versão 5.x do React Navigation
+        // tabBarOptions={{
+          //   showLabel: false,
+        //   showIcon: true,
+        //   activeBackgroundColor: '#B727FF',
+        //   inactiveBackgroundColor: '#DD99FF',
+        //   activeTintColor: 'red',
+        //   inactiveTintColor: 'blue',
+        //   style: { height: 50 }
+        // }}
+        
+        screenOptions={ ({ route }) => ({
+          tabBarIcon: () => {
+            
+            if (route.name === 'Lista') {
+              return(
+                <Image
+                  source={require('./assets/img/listados.png')}
+                  style={styles.tabBarIcon}
+                />
+              )
+            }
+            if (route.name === 'Perfil') {
+              return(
+                <Image
+                  source={require('./assets/img/logo-login.png')}
+                  style={styles.tabBarIcon}
+                />
+              )
+            }
+          },
+
+           // React Navigation 6.x
+           headerShown: false,
+           tabBarShowLabel: false,
+           tabBarActiveBackgroundColor: '#C3EBFA',
+           tabBarInactiveBackgroundColor: '#E0F5FD',
+           // tabBarActiveTintColor: 'blue',
+           // tabBarInactiveTintColor: 'red',
+           tabBarStyle: { height: 80 }              
+         }) }
+       >
+         <bottomTab.Screen name="Lista" component={Lista} />
+         <bottomTab.Screen name="Perfil" component={Perfil} />
+       </bottomTab.Navigator>  
+       
+        </NavigationContainer>
+
+
 
 
       </View>

@@ -41,7 +41,8 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
             return Ok(_usuarioRepository.Listar());
         }
 
-
+        /// <summary>
+        /// 
         /// </summary>
         /// <param name="idUsuario">id do usuário a ser buscado</param>
         /// <returns>Um usuário encontrado com o status code 200 - Ok</returns>

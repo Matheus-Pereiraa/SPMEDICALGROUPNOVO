@@ -10,6 +10,7 @@ import {
     TouchableOpacity,
     View,
     ImageBackground,
+    Image,
     TextInput,
 } from 'react-native';
 
@@ -39,21 +40,50 @@ export default class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: '',
-            senha: ''
+            email: 'lucas@gmail.com',
+            senha: 'lucas756'
         };
     }
 
 
 
-    realizarLogin = () => {
-        this.props.navigation.navigate('main')
+    realizarLogin = async () => {
+
+
+        console.warn(this.state.email + ' ' + this.state.senha)
+
+        try {
+            const resposta = await api.post('/Login', {
+
+                email: this.state.email,
+                senha: this.state.senha
+            })
+
+            const token = resposta.data.token
+            console.warn(resposta);
+
+            await AsyncStorage.setItem('usuariologin', token)
+
+            if (resposta === 200) {
+                this.props.navigation.navigate('Main')
+            }
+
+
+            
+        } catch (error) {
+            console.warn(error);
+        }
+
+
+        //const token
+
+
+
     }
 
 
     render() {
         return (
-
 
             <ImageBackground
                 source={(require('../../assets/img/Background.png'))}
@@ -61,14 +91,41 @@ export default class Login extends Component {
 
 
 
-                <View>
+
+
+
+
+                <View style={styles.ContainerLogin}>
+
+                    <Image
+                        source={(require('../../assets/img/Group1.png'))}
+                        style={styles.MainImgLogin}
+                    />
+
+
+                    <TextInput style={styles.inputLogin}
+                        placeholder='Username'
+                        placeholderTextColor='#000000'
+                        keyboardType='email-address'
+                        onChangeText={email => this.setState(
+                            { email })}
+                    />
+
+                    <TextInput style={styles.inputLogin}
+                        placeholder='Password'
+                        placeholderTextColor='#000000'
+                        keyboardType='default'
+                        onChangeText={senha => this.setState(
+                            { senha })}
+                        secureTextEntry={true}
+                    />
 
                     <TouchableOpacity
                         style={styles.btnLogin}
                         onPress={this.realizarLogin}
                     >
 
-                        <Text>Login</Text>
+                        <Text style={styles.LoginText}>Login</Text>
 
                     </TouchableOpacity>
                 </View>
@@ -107,14 +164,39 @@ const styles = StyleSheet.create({
     btnLogin: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 38,
-        width: 240,
+        height: 51,
+        width: 250,
         backgroundColor: '#FFFFFF',
         borderColor: '#FFFFFF',
         borderWidth: 1,
         borderRadius: 7,
-        shadowOffset: { height: 1, width: 1 },
+        shadowOffset: { height: 5, width: 10 },
+    },
+    ContainerLogin: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    LoginText: {
+        fontSize: 18,
+        color: '#467CE5',
+        fontFamily: 'Open Sans Light',
+        letterSpacing: 2,
+        textTransform: 'uppercase'
     },
 
+    MainImgLogin: {
+        margin: 60,
+        marginTop: 0
+    },
+
+    inputLogin: {
+        width: 250,
+        marginBottom: 18,
+        fontSize: 16,
+        borderBottomColor: '#fff',
+        borderBottomWidth: 1
+
+    }
 
 });

@@ -55,7 +55,12 @@ class App extends Component {
 
         <NavigationContainer>
 
-          <AuthStack.Navigator>
+          <AuthStack.Navigator
+          screenOptions={{
+            headerShown:false,
+          }}
+          >
+            
             <AuthStack.Screen name='Login' component={Login}/>
             <AuthStack.Screen name='Main' component={Main}/>
 

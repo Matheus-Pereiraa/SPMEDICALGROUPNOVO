@@ -30,7 +30,7 @@ import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class Main extends Component {
+class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Main;
+export default Perfil;

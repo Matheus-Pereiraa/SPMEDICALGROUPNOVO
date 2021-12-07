@@ -31,7 +31,7 @@ import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-class Main extends Component {
+class Lista extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Main;
+export default Lista;

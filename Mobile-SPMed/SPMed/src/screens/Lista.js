@@ -35,25 +35,26 @@ class Lista extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ListaConsulta: []
+      ListaMedico: [],
     };
-  };
+  }
 
-  inscrever = async idConsulta => {
+  BuscaConsulta = async () => {
     try {
       const token = await AsyncStorage.getItem('userToken');
-
-      console.warn(idConsulta);
-
-      await api.post(
-        '/api/Consultas' + idconsulta,
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
+      const resposta = await api.get('/Consulta/minhas', {
+        headers: {
+          Authorization: 'Bearer ' + token,
         },
-      );
+
+      });
+
+      if (resposta.status === 200) {
+        const dadoDaApi = resposta.data;
+        this.setState({ ListaMedico: dadoDaApi })
+      }
+
+
     } catch (error) {
       console.warn(error);
     }
@@ -61,24 +62,14 @@ class Lista extends Component {
 
 
 
-  BuscarConsulta = async () => {
-    const resposta = await api.get('/Consultas');
-    const dadoDaApi = resposta.data;
-    this.setState({ ListaConsulta: dadoDaApi })
+  componentDidMount() {
+    this.BuscaConsulta();
   }
 
 
   render() {
     return (
       <View style={styles.main}>
-
-        
-
-
-
-
-
-
 
 
         {/* HEADER */}
@@ -110,7 +101,15 @@ class Lista extends Component {
       <View style={styles.flatItemContainer}>
         <Text styles={styles.flatItemTittle}>{item.idPaciente}</Text>
         <Text styles={styles.flatItemInfo}>{item.Descricao}</Text>
-        <Text style={styles.flatItemInfo}>{item.DataeHora}</Text>
+
+
+        <Text style={styles.flatItemInfo}>
+          {Intl.DateTimeFormat("pt-BR", {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric',
+            hour12: true
+          }).format(new Date(item.dataEvento))}
+        </Text>
       </View>
     </View>
   )

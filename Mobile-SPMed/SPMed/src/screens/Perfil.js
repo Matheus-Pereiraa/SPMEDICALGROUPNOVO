@@ -1,123 +1,172 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-
-
-//navigation
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-const bottomTab = createBottomTabNavigator();
-import { NavigationContainer } from '@react-navigation/native';
-
-
-import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 
-
-class Perfil extends Component {
+export default class Perfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ListaConsulta: []
+      nome: '',
+      email: '',
     };
-  };
-
-  inscrever = async idConsulta => {
+  }
+  buscarDadosStorage = async () => {
     try {
-      const token = await AsyncStorage.getItem('userToken');
+      const valorToken = await AsyncStorage.getItem('userToken');
 
-      console.warn(idConsulta);
+      console.warn(jwtDecode(valorToken));
 
-      await api.post(
-        '/presenca/Consultas' + idconsulta,
-        {},
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-          },
-        },
-      );
+      if (valorToken != null) {
+        this.setState({nome: jwtDecode(valorToken).name});
+        this.setState({email: jwtDecode(valorToken).email});
+      }
     } catch (error) {
       console.warn(error);
     }
   };
 
-
-
-  BuscarConsulta = async () => {
-    const resposta = await api.get('/Consultas');
-    const dadoDaApi = resposta.data;
-    this.setState({ ListaConsulta: dadoDaApi })
+  componentDidMount() {
+    this.buscarDadosStorage();
   }
 
+  realizarLogout = async () => {
+    //vamos remover o armazenamento local.
+    try {
+      await AsyncStorage.removeItem('userToken');
+      this.props.navigation.navigate('Login'); //tem que ser mesmo nome.
+    } catch (error) {
+      console.warn(error);
+    }
+  };
 
   render() {
     return (
       <View style={styles.main}>
-
-        
-
-
-
-
-
-
-
-
-        {/* HEADER */}
+        {/* Cabeçalho - Header */}
         <View style={styles.mainHeader}>
-          <Text style={styles.mainHeaderText}>{"".toUpperCase()}</Text>
+          <View style={styles.buttonContainer}>
+          </View>
+          <View style={styles.mainHeaderRow}>
+            
+            <Text style={styles.mainHeaderText}>{'Perfil'.toUpperCase()}</Text>
+          </View>
           <View style={styles.mainHeaderLine} />
         </View>
 
+        {/* Corpo - Body - Section */}
         <View style={styles.mainBody}>
-          <FlatList
-            contentContainerStyle={styles.mainBodyContent}
-            data={this.state.ListaConsulta}
-            keyExtractor={item => item.idConsulta}
-            renderItem={this.renderItem}
-          />
+          <View style={styles.mainBodyInfo}>
+            {/* <Image 
+              source={imagem vinda da API}
+              style={styles.mainBodyImg}
+            /> */}
+            {/* <View style={styles.mainBodyImg} /> */}
+            
+              <Image
+                source={require('../../assets/img/profile2x.png')}
+                // style={styles.mainBodyImg}
+              />
+        
 
+            <Text style={styles.mainBodyText}>{this.state.nome}</Text>
+            <Text style={styles.mainBodyText}>{this.state.email}</Text>
+          </View>
+
+          <TouchableOpacity
+            style={styles.btnLogout}
+            onPress={this.realizarLogout}>
+            <Text style={styles.btnLogoutText}>SAIR</Text>
+          </TouchableOpacity>
         </View>
-
-
       </View>
-
-
-
     );
-  };
-
-  renderItem = ({ item }) => (
-    <View style={styles.flatItemLinhas}>
-      <View style={styles.flatItemContainer}>
-        <Text styles={styles.flatItemTittle}>{item.idPaciente}</Text>
-        <Text styles={styles.flatItemInfo}>{item.Descricao}</Text>
-        <Text style={styles.flatItemInfo}>{item.DataeHora}</Text>
-      </View>
-    </View>
-  )
-};
-
+  }
+}
 
 const styles = StyleSheet.create({
-  
-});
+  // conteúdo da main
+  main: {
+    flex: 1,
+    backgroundColor: '#e5e5e5',
+  },
+  // cabeçalho
+  mainHeader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mainHeaderRow: {
+    flexDirection: 'row',
+    marginTop: 70
+  },
+  // imagem do cabeçalho
+  mainHeaderImg: {
+    width: 22,
+    height: 22,
+    marginRight: -5,
+    marginTop: -12,
+  },
+  // texto do cabeçalho
+  mainHeaderText: {
+    fontSize: 25,
+    letterSpacing: 5,
+    color: 'black',
+    fontFamily: 'Open Sans',
+  },
+  // linha de separação do cabeçalho
+  mainHeaderLine: {
+    width: 220,
+    paddingTop: 10,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  },
 
-export default Perfil;
+  // conteúdo do body
+  mainBody: {
+    flex: 4,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  // informações do usuário
+  mainBodyInfo: {
+    alignItems: 'center',
+    marginTop:70
+    
+  },
+  mainBodyImg: {
+    backgroundColor: 'black',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 50,
+  },
+  mainBodyText: {
+    marginTop: 40,
+    color: 'black',
+    fontSize: 15,
+    marginBottom: 20,
+  },
+  // botão de logout
+  btnLogout: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+    width: 240,
+    borderTopWidth: 1,
+    borderColor: 'black',
+    marginBottom: 50,
+  },
+  // texto do botão
+  btnLogoutText: {
+    fontSize: 20,
+    color: '#CB77FF',
+  },
+});

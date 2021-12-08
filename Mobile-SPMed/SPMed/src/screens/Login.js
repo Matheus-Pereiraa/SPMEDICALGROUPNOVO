@@ -57,29 +57,33 @@ export default class Login extends Component {
 
                 email: this.state.email,
                 senha: this.state.senha
-            })
+            });
 
             const token = resposta.data.token
+            console.warn(token)
+
+
+            await AsyncStorage.setItem('userToken', token)
             console.warn(resposta);
 
-            await AsyncStorage.setItem('usuariologin', token)
-
-            if (resposta === 200) {
+            if (resposta.status === 200) {
                 this.props.navigation.navigate('Main')
             }
 
+        else{
+            console.warn('Usuario/Email inválido')
+        }
 
-            
         } catch (error) {
-            console.warn(error);
+            console.warn(error)
         }
 
 
-        //const token
 
 
 
-    }
+
+    };
 
 
     render() {

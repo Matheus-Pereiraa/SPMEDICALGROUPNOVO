@@ -52,8 +52,8 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var meuToken = new JwtSecurityToken(
-                    issuer: "SPmed.webAPI",
-                    audience: "SPmed.webAPI",
+                    issuer: "SPMEDICALGROUP_SENAI_WEBAPI",
+                    audience: "SPMEDICALGROUP_SENAI_WEBAPI",
                     claims: minhasClaims,
                     expires: DateTime.Now.AddMinutes(30),
                     signingCredentials: creds

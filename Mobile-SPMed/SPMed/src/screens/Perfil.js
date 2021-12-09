@@ -64,15 +64,9 @@ export default class Perfil extends Component {
         {/* Corpo - Body - Section */}
         <View style={styles.mainBody}>
           <View style={styles.mainBodyInfo}>
-            {/* <Image 
-              source={imagem vinda da API}
-              style={styles.mainBodyImg}
-            /> */}
-            {/* <View style={styles.mainBodyImg} /> */}
             
               <Image
                 source={require('../../assets/img/profile2x.png')}
-                // style={styles.mainBodyImg}
               />
         
 

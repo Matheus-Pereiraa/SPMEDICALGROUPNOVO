@@ -76,11 +76,11 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseRouting();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {

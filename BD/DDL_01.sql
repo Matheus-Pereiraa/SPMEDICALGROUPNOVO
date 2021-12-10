@@ -1,6 +1,3 @@
-CREATE DATABASE SENAI_SPMEDICALDROUP
-GO
-
 USE SENAI_SPMEDICALDROUP;
 GO
 
@@ -80,3 +77,26 @@ CREATE TABLE Situacao(
 	Descricao VARCHAR(15) NOT NULL
 );
 GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

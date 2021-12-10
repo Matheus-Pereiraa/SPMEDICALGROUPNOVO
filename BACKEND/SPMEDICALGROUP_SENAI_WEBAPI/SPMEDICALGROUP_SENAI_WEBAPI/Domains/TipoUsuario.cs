@@ -15,6 +15,8 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Domains
         public byte IdTipoUsuario { get; set; }
         public string TituloTipoUsuario { get; set; }
 
+        public virtual Usuario IdUsuarioNavigation { get; set; }
+
         public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

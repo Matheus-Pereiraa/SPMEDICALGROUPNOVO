@@ -63,7 +63,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="novaClinica">Clinica a ser cadastrada</param>
         /// <returns>Um status code 201 - Created</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "2")]
         [HttpPost]
         public IActionResult Cadastrar(Clinica novaClinica)
         {
@@ -77,7 +77,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="ClinicaAtualizada">Objeto com as novas informações da clinica e o id da clinica a ser atualizada</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "2")]
         [HttpPut]
         public IActionResult Atualizar(Clinica ClinicaAtualizada)
         {
@@ -106,7 +106,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="idClinica">id da clinica a ser deletado</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "2")]
         [HttpDelete("{idClinica}")]
         public IActionResult Deletar(int idClinica)
         {

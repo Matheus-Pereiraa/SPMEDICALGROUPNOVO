@@ -35,7 +35,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         ///  Listas todas as consultas do usuário logado
         /// </summary>
         /// <returns>Uma lista de consultas</returns>
-        [Authorize(Roles = "2,3")]
+        [Authorize(Roles = "1, 2")]
         [HttpGet("minhas")]
         public IActionResult ListarMinhas()
         {
@@ -59,7 +59,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// Lista todas as Consultas existentes
         /// </summary>
         /// <returns>Uma lista de consultas com o status code 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -88,7 +88,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="novaConsulta">Consulta a ser cadastrada</param>
         /// <returns>Um status code 201 - Created</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPost]
         public IActionResult Cadastrar(Consultum novaConsulta)
         {
@@ -102,7 +102,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="consultaAtualizada">Objeto com as novas informações da Consulta e o id da consulta a ser atualizada</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPut]
         public IActionResult Atualizar(Consultum consultaAtualizada)
         {
@@ -129,7 +129,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="idConsulta">id da Consulta a ser deletada</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete("{idConsulta}")]
         public IActionResult Deletar(int idConsulta)
         {
@@ -144,7 +144,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// <param name="idConsulta">Id da consulta a ser atualizada</param>
         /// <param name="status">nova situação da consulta</param>
         /// <returns>Um status code 200 - OK</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPatch("status/{idConsulta}")]
         public IActionResult AlterarStatus(int idConsulta, Situacao status)
         {

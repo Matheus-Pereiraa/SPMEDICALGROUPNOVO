@@ -40,8 +40,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            email: 'alexandre@gmail.com',
-            senha: 'alezinhogameplays'
+            email: 'fafa123@gmail.com',
+            senha: 'fazinho789'
         };
     }
 
@@ -60,11 +60,10 @@ export default class Login extends Component {
             });
 
             const token = resposta.data.token
-            console.warn(token)
+            // console.warn(token)
 
 
             await AsyncStorage.setItem('userToken', token)
-            console.warn(resposta);
 
             if (resposta.status === 200) {
                 this.props.navigation.navigate('Main')

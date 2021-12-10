@@ -21,6 +21,8 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Domains
 
         public virtual TipoUsuario IdTipoUsuarioNavigation { get; set; }
         public virtual Medico Medico { get; set; }
+
         public virtual UsuarioPaciente UsuarioPaciente { get; set; }
+
     }
 }

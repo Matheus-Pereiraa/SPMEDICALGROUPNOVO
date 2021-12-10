@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import {
   FlatList,
-  StatusBar,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-
-
-
 
 import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,16 +21,18 @@ class Lista extends Component {
   BuscaConsulta = async () => {
     try {
       const token = await AsyncStorage.getItem('userToken');
-      const resposta = await api.get('api/Consulta/minhas', {
+      const resposta = await api.get('/Consulta/minhas', {
         headers: {
           Authorization: 'Bearer ' + token,
         },
 
       });
-
+      console.warn()
+      console.warn(resposta)
       if (resposta.status === 200) {
         const dadoDaApi = resposta.data;
         this.setState({ ListaMedico: dadoDaApi })
+        // console.warn(this.state.ListaMedico)
       }
 
 
@@ -42,7 +40,6 @@ class Lista extends Component {
       console.warn(error);
     }
   };
-
 
 
   componentDidMount() {
@@ -61,71 +58,42 @@ class Lista extends Component {
           <View style={styles.mainHeaderLine} />
         </View>
 
-        
-          <FlatList
-            contentContainerStyle={styles.mainBodyContent}
-            data={this.state.ListaMedico}
-            keyExtractor={item => item.idConsulta}
-            renderItem={this.renderItem}
-          />
-
-        
-
-
+        <FlatList
+          contentContainerStyle={styles.mainBodyContent}
+          data={this.state.ListaMedico}
+          keyExtractor={item => item.idConsulta}
+          renderItem={this.renderItem}
+        />
       </View>
-
-
 
     );
   };
 
   renderItem = ({ item }) => (
+
+    
+
     <View style={styles.flatItemLinhas}>
       <View style={styles.flatItemContainer}>
-        <Text styles={styles.flatItemTittle}>Data</Text>
-        <Text style={styles.flatItemInfo}>
-          {Intl.DateTimeFormat("pt-BR", {
-            year: 'numeric', month: 'numeric', day: 'numeric',
-            hour: 'numeric', minute: 'numeric',
-            hour12: true
-          }).format(new Date(item.dataEvento))} </Text>
+        <View style={styles.boxContainer}>
+          <Text styles={styles.flatItemTittle}>Data</Text>
+          <Text style={styles.flatItemInfo}>
+            {Intl.DateTimeFormat("pt-BR", {
+              year: 'numeric', month: 'numeric', day: 'numeric',
+              hour: 'numeric', minute: 'numeric',
+              hour12: true
+            }).format(new Date(item.dataeHora))} </Text>
 
-        <Text style={styles.flatItemTittle}>Descrição</Text>
-        <Text style={styles.flatItemInfo}>{item.descricao}</Text>
-        <Text style={styles.flatItemTittle}>Situação</Text>
-        <Text style={styles.flatItemInfo}>{item.idSituacaoNavigation.idSituacao}</Text>
+          <Text style={styles.flatItemTittle}>Descrição</Text>
+          <Text style={styles.flatItemInfo}>{item.descricao}</Text>
+          <Text style={styles.flatItemTittle}>Situação</Text>
+          <Text style={styles.flatItemInfo}>{item.idSituacaoNavigation.descricao}</Text>
 
-        <Text style={styles.flatItemTittle}>PACIENTE</Text>
-        <Text style={styles.flatItemTittle}>Nome</Text>
-        <Text style={styles.flatItemInfo}>{item.idPacienteNavigation.nomePaciente}</Text>
-        <Text style={styles.flatItemTittle}>RG</Text>
-        <Text style={styles.flatItemInfo}>{item.idPacienteNavigation.rg}</Text>
-        <Text style={styles.flatItemTittle}>CPF</Text>
-        <Text style={styles.flatItemInfo}>{item.idPacienteNavigation.cpf}</Text>
-        <Text style={styles.flatItemTittle}>Data Nascimento</Text>
-        <Text style={styles.flatItemInfo}>{Intl.DateTimeFormat("pt-BR", {
-          year: 'numeric', month: 'short', day: 'numeric',
-        }).format(new Date(item.idPacienteNavigation.dataNasc))}</Text>
-        <Text style={styles.flatItemTittle}>Telefone</Text>
-        <Text style={styles.flatItemInfo}>{item.idPacienteNavigation.telefone}</Text>
-
-        <Text style={styles.flatItemTittle}>MÉDICO</Text>
-        <Text style={styles.flatItemTittle}>Nome</Text>
-        <Text style={styles.flatItemInfo}>{item.idMedicoNavigation.nomeMed}</Text>
-        <Text style={styles.flatItemTittle}>CRM</Text>
-        <Text style={styles.flatItemInfo}>{item.idMedicoNavigation.crm}</Text>
-        <Text style={styles.flatItemTittle}>Especialidade</Text>
-        <Text style={styles.flatItemInfo}>{item.idMedicoNavigation.idEspecialidadeNavigation.Descricao}</Text>
-
-
-
-
-
-
-
-
-
-
+          <Text style={styles.flatItemTittle}>MÉDICO</Text>
+          <Text style={styles.flatItemInfo}>{item.idMedicoNavigation.IdUsuarioNavigation}</Text>
+          <Text style={styles.flatItemTittle}>Especialidade</Text>
+          <Text style={styles.flatItemInfo}>{item.idMedicoNavigation.idEspecialidadeNavigation.descricao}</Text>
+        </View>
 
       </View>
     </View>
@@ -134,6 +102,11 @@ class Lista extends Component {
 
 
 const styles = StyleSheet.create({
+
+  boxContainer: {
+    alignItems: 'center',
+  },
+
   mainHeader: {
     justifyContent: 'center',
     alignItems: 'center'

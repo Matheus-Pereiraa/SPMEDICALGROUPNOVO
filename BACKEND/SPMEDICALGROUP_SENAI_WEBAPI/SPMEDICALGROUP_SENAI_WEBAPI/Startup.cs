@@ -54,8 +54,8 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI
                     ValidateLifetime = true,
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("chave-autenticacao-Spmed")),
                     ClockSkew = TimeSpan.FromMinutes(30),
-                    ValidIssuer = "SPmed.webAPI",
-                    ValidAudience = "SPmed.webAPI"
+                    ValidIssuer = "SPMEDICALGROUP_SENAI_WEBAPI",
+                    ValidAudience = "SPMEDICALGROUP_SENAI_WEBAPI"
                 };
             });
 

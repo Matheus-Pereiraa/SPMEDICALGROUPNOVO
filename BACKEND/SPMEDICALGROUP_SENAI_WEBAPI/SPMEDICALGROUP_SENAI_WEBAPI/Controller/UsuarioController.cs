@@ -34,7 +34,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// Lista todos os Usuário que existentem
         /// </summary>
         /// <returns>Uma lista de usuários com o status code 200 - fé</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpGet]
         public IActionResult Listar()
         {
@@ -46,7 +46,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="idUsuario">id do usuário a ser buscado</param>
         /// <returns>Um usuário encontrado com o status code 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpGet("{idUsuario}")]
         public IActionResult BuscarPorId(int idUsuario)
         {
@@ -87,7 +87,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="novoUsuario">Usuario a ser cadastrado</param>
         /// <returns>Um status code 201 - Created</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPost]
         public IActionResult Cadastrar(Usuario novoUsuario)
         {
@@ -101,7 +101,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="arquivo">imagem a ser salva</param>
         /// <returns>Status code 200 - OK</returns>
-        [Authorize(Roles = "2,3")]
+        [Authorize(Roles = "1,2")]
         [HttpPost("imagem")]
         public IActionResult postDir(IFormFile arquivo)
         {
@@ -129,7 +129,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="usuarioAtualizado">Objeto com as novas informações do Usuário e o id do usuário a ser atualizado</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpPut]
         public IActionResult Atualizar(Usuario usuarioAtualizado)
         {
@@ -158,7 +158,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Controller
         /// </summary>
         /// <param name="idUsuario">id do Usuário a ser deletado</param>
         /// <returns>Um status code 204 - No content</returns>
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete("{idUsuario}")]
         public IActionResult Deletar(int idUsuario)
         {

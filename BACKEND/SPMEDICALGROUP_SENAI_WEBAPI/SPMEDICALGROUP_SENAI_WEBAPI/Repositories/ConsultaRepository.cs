@@ -10,7 +10,7 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Repositories
 {
     public class ConsultaRepository : IConsultaRepository
     {
-        SPmedContext ctx = new SPmedContext();
+        SPmedContext ctx = new();
         public void AddDescricao(int idConsulta, string descricao)
         {
             throw new NotImplementedException();
@@ -171,13 +171,74 @@ namespace SPMEDICALGROUP_SENAI_WEBAPI.Repositories
                         Descricao = c.IdSituacaoNavigation.Descricao
                     }
                 })
-
                 .ToList();
         }
 
         public List<Consultum> ListarMinhas(int idUsuario)
         {
-            throw new NotImplementedException();
+            return ctx.Consulta
+               .Select(c => new Consultum
+               {
+                   IdConsulta = c.IdConsulta,
+                   Descricao = c.Descricao,
+                   DataeHora = c.DataeHora,
+                   IdPacienteNavigation = new UsuarioPaciente
+                   {
+                       IdUsuario = c.IdPacienteNavigation.IdUsuario,
+                       IdPaciente = c.IdPacienteNavigation.IdPaciente,
+                       Telefone = c.IdPacienteNavigation.Telefone,
+                       Rg = c.IdPacienteNavigation.Rg,
+                       Cpf = c.IdPacienteNavigation.Cpf,
+                       DataNascimento = c.IdPacienteNavigation.DataNascimento,
+                   },
+                   IdMedicoNavigation = new Medico
+                   {
+                       IdUsuario = c.IdMedicoNavigation.IdUsuario,
+                       IdMedico = c.IdMedicoNavigation.IdMedico,
+                       Crm = c.IdMedicoNavigation.Crm,
+                       IdEspecialidadeNavigation = new Especialidade
+                       {
+                           IdEspecialidade = c.IdMedicoNavigation.IdEspecialidadeNavigation.IdEspecialidade,
+                           Descricao = c.IdMedicoNavigation.IdEspecialidadeNavigation.Descricao
+                       },
+                   },
+                   IdSituacaoNavigation = new Situacao
+                   {
+                       IdSituacao = c.IdSituacaoNavigation.IdSituacao,
+                       Descricao = c.IdSituacaoNavigation.Descricao
+                   }
+               })
+                    .Where(c => c.IdMedicoNavigation.IdUsuario == idUsuario || c.IdPacienteNavigation.IdUsuario == idUsuario)
+                    .ToList();
+
+        }
+
+        public void Situacao(int id, string status)
+        {
+            Consultum Consulta = ctx.Consulta
+                .FirstOrDefault(e => e.IdConsulta == id);
+
+            switch (status)
+            {
+                case "1":
+                    Consulta.IdSituacao = 1;
+                    break;
+
+                case "2":
+                    Consulta.IdSituacao = 2;
+                    break;
+
+                case "3":
+                    Consulta.IdSituacao = 3;
+                    break;
+
+                default:
+                    Consulta.IdSituacao = Consulta.IdSituacao;
+                    break;
+            }
+            
+            ctx.Consulta.Update(Consulta);
+            ctx.SaveChanges();
         }
     }
 }

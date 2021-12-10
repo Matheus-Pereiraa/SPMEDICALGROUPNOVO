@@ -22,7 +22,6 @@ export default class Perfil extends Component {
     try {
       const valorToken = await AsyncStorage.getItem('userToken');
 
-      console.warn(jwtDecode(valorToken));
 
       if (valorToken != null) {
         this.setState({nome: jwtDecode(valorToken).name});

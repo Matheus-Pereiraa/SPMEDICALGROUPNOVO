@@ -159,7 +159,7 @@ export default function ListarMedico() {
             <footer>
                 <div className="container container_footer">
                     <span className="span_footer">
-                        ©2020 Cia. da Consulta - Todos os direitos reservados
+                        SPMEDICAL - Todos os direitos reservados
                     </span>
                     <span className="span_footer">
                         Os médicos da Central de Consultas são especialistas ou estão em conclusão de sua pós-graduação.

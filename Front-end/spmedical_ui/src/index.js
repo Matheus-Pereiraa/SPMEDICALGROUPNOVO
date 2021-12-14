@@ -8,6 +8,8 @@ import './index.css';
 import Home from './Pages/Home/App.js';
 import Login from './Pages/Login/Login';
 import ListarMedico from './Pages/ListarMedico/ListarMedico';
+import ListarPaciente from './Pages/ListarPaciente/ListarPaciente';
+import Cadastrar from './Pages/Cadastrar/Cadastrar';
 
 
 import reportWebVitals from './reportWebVitals';
@@ -19,7 +21,9 @@ const routing = (
       <Switch>
         <Route exact path="/"component={Home}/>
         <Route exact path="/Login"component={Login}/>
-        <Route exact path="/ListarMeidico"component={ListarMedico}/>
+        <Route exact path="/ListarMedico"component={ListarMedico}/>
+        <Route exact path="/ListarPaciente"component={ListarPaciente}/>
+        <Route exact path="/Cadastrar"component={Cadastrar}/>
       </Switch>
     </div>
   </Router>

@@ -56,7 +56,6 @@ export default class Header extends Component {
             <header>
                 <div className="container container_header">
                     <button id="btnMenu" onClick={() => this.toggleMenu()} >
-                        {/*<img className="menu-hamb" src={Menu} alt="Menu Hamburguer" />*/}
                     </button>
                     <nav id="nav">
                         <ul id="menu">
@@ -67,7 +66,6 @@ export default class Header extends Component {
                         </ul>
 
                     </nav>
-                    {/*<Link to="/"><img className="logo" src={Logo} alt="Logo completo" /></Link>*/}
                     <span></span>
                     <Link to="/login" className="login">{this.props.Login}</Link>
                 </div>

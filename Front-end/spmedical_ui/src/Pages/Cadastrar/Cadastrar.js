@@ -49,10 +49,7 @@ export default function Cadastrar () {
 
     useEffect(buscarMedico, [])
 
-    // atualizaStateCampo = (campo) => {
-    //     this.setState({ [campo.target.name]: campo.target.value });
-    // };
-
+    
     function cadastrarConsulta(evento) {
         evento.preventDefault();
         api.post('/Consulta', {

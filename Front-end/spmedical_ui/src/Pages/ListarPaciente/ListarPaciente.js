@@ -75,10 +75,7 @@ export default function ListarPaciente() {
 
     }
 
-    // estrutura do Hook useEffect
-    // useEffect( efeito, causa )
-    // useEffect( { o que vai ser feito }, { o que será escutado } )
-    // dessa forma, 
+    
     useEffect(buscarConsultasPaciente, []);
 
     return (

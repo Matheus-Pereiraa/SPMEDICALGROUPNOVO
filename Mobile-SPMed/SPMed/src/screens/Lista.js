@@ -32,7 +32,6 @@ class Lista extends Component {
       if (resposta.status === 200) {
         const dadoDaApi = resposta.data;
         this.setState({ ListaMedico: dadoDaApi })
-        // console.warn(this.state.ListaMedico)
       }
 
 

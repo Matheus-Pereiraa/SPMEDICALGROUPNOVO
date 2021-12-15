@@ -34,10 +34,7 @@ export default function ListarMedico() {
             .catch(erro => console.log(erro));
     };
 
-    // estrutura do Hook useEffect
-    // useEffect( efeito, causa )
-    // useEffect( { o que vai ser feito }, { o que será escutado } )
-    // dessa forma, 
+    
     useEffect(buscarConsultasMedico, []);
 
     function atualizarDescricao(idConsulta) {
@@ -67,12 +64,11 @@ export default function ListarMedico() {
     }
 
     function permitirTextArea(idConsulta, descricaoConsulta) {
-        // console.log("Você está editando a situação da consulta " + idConsulta + "e a situação é " + idSituacao)
+        
         setDescricao(descricaoConsulta);
         console.log(descricaoConsulta)
         var textoDescricao = document.getElementById("descricao" + idConsulta)
-        // textoDescricao.removeAttribute("readOnly");
-        // descricao = descricaoConsulta
+        
         document.getElementById("descricao" + idConsulta).value = descricaoConsulta
 
         if (textoDescricao.value === null || textoDescricao.value === "") {
